@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>Custom Record</label>
+    <label>Test Record</label>
     <protected>false</protected>
     <values>
-        <field>Custom_Checkbox1__c</field>
-        <value xsi:type="xsd:boolean">true</value>
-    </values>
-    <values>
-        <field>Custom_Checkbox2__c</field>
+        <field>Test_Checkbox1__c</field>
         <value xsi:type="xsd:boolean">false</value>
     </values>
     <values>
-        <field>Custom_Checkbox3__c</field>
+        <field>Test_Checkbox__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
 </CustomMetadata>
