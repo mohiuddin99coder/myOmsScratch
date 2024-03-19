@@ -10,4 +10,8 @@
         <field>Test_Checkbox__c</field>
         <value xsi:type="xsd:boolean">true</value>
     </values>
+    <values>
+        <field>Test_Number__c</field>
+        <value xsi:type="xsd:double">12.0</value>
+    </values>
 </CustomMetadata>
