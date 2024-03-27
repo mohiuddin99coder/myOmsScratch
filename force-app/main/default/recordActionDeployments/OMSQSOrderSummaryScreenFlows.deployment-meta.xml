@@ -20,16 +20,4 @@
     <hasOmniscripts>false</hasOmniscripts>
     <hasRecommendations>false</hasRecommendations>
     <masterLabel>OMSQS Order Summary Screen Flows</masterLabel>
-    <selectableItems>
-        <action>OMSQS_Cancel_Item_Flow</action>
-        <frequentActionSequenceNbr>0</frequentActionSequenceNbr>
-        <isFrequentAction>false</isFrequentAction>
-        <type>Flow</type>
-    </selectableItems>
-    <selectableItems>
-        <action>OMSQS_RMA_Return_Items</action>
-        <frequentActionSequenceNbr>0</frequentActionSequenceNbr>
-        <isFrequentAction>false</isFrequentAction>
-        <type>Flow</type>
-    </selectableItems>
 </RecordActionDeployment>
