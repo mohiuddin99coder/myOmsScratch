@@ -3,23 +3,9 @@
     <fullName>Check_DataType__c</fullName>
     <externalId>false</externalId>
     <label>Check DataType</label>
+    <length>10</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
-    <type>Picklist</type>
-    <valueSet>
-        <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>Test1</fullName>
-                <default>false</default>
-                <label>Test1</label>
-            </value>
-            <value>
-                <fullName>Test2</fullName>
-                <default>false</default>
-                <label>Test2</label>
-            </value>
-        </valueSetDefinition>
-    </valueSet>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>
