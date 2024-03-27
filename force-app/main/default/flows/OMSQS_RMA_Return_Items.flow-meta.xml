@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
+        <name>Check_is_Settled_Payments</name>
+        <label>Check is Settled Payments</label>
+        <locationX>1150</locationX>
+        <locationY>866</locationY>
+        <actionName>PPBTLOM__BraintreePaymentCheckAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Set_stage_to_part_1</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>orderSummaryIds</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>PPBTLOM__BraintreePaymentCheckAction</nameSegment>
+        <versionSegment>1</versionSegment>
+    </actionCalls>
+    <actionCalls>
         <name>Create_Return_Order</name>
         <label>Create Return Order</label>
         <locationX>1150</locationX>
-        <locationY>5966</locationY>
+        <locationY>6326</locationY>
         <actionName>createReturnOrder</actionName>
         <actionType>createReturnOrder</actionType>
         <connector>
@@ -28,13 +48,14 @@
         <name>Return_Order_Item_Summaries_Preview</name>
         <label>Return Order Item Summaries Preview</label>
         <locationX>1150</locationX>
-        <locationY>4718</locationY>
+        <locationY>4970</locationY>
         <actionName>returnOrderItemSummariesPreview</actionName>
         <actionType>returnOrderItemSummariesPreview</actionType>
         <connector>
             <targetReference>Set_Stage_To_Stage_5</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Invocable_Action_Error_Message</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -61,8 +82,8 @@
     <assignments>
         <name>Active_Stages_With_Return_Fees</name>
         <label>Active Stages</label>
-        <locationX>1335</locationX>
-        <locationY>532</locationY>
+        <locationX>1150</locationX>
+        <locationY>674</locationY>
         <assignmentItems>
             <assignToReference>$Flow.ActiveStages</assignToReference>
             <operator>Add</operator>
@@ -106,14 +127,14 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Set_stage_to_part_1</targetReference>
+            <targetReference>Check_is_Settled_Payments</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Active_Stages_Without_Return_Fees</name>
         <label>Active Stages</label>
-        <locationX>978</locationX>
-        <locationY>526</locationY>
+        <locationX>886</locationX>
+        <locationY>674</locationY>
         <assignmentItems>
             <assignToReference>$Flow.ActiveStages</assignToReference>
             <operator>Add</operator>
@@ -143,14 +164,14 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Set_stage_to_part_1</targetReference>
+            <targetReference>Check_is_Settled_Payments</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Assign_PricebookEntryId</name>
         <label>Assign PricebookEntryId</label>
         <locationX>578</locationX>
-        <locationY>2810</locationY>
+        <locationY>2954</locationY>
         <assignmentItems>
             <assignToReference>selectedPricebookEntryId</assignToReference>
             <operator>Assign</operator>
@@ -166,7 +187,7 @@
         <name>Assign_Product2</name>
         <label>Assign Product2</label>
         <locationX>578</locationX>
-        <locationY>1994</locationY>
+        <locationY>2354</locationY>
         <assignmentItems>
             <assignToReference>selectedProduct2Id</assignToReference>
             <operator>Assign</operator>
@@ -182,7 +203,7 @@
         <name>Change_Input_Representation</name>
         <label>Change Input Representation</label>
         <locationX>1326</locationX>
-        <locationY>4526</locationY>
+        <locationY>4778</locationY>
         <assignmentItems>
             <assignToReference>changeInputRepresentation.changeItems</assignToReference>
             <operator>Add</operator>
@@ -198,7 +219,7 @@
         <name>Change_Item_Assignment</name>
         <label>Change Item Assignment</label>
         <locationX>1238</locationX>
-        <locationY>1046</locationY>
+        <locationY>1406</locationY>
         <assignmentItems>
             <assignToReference>changeItem.orderItemSummaryId</assignToReference>
             <operator>Assign</operator>
@@ -242,7 +263,7 @@
         <name>Change_Item_Fee_Input_Representation</name>
         <label>Change Item Fee Input Representation</label>
         <locationX>1414</locationX>
-        <locationY>4226</locationY>
+        <locationY>4478</locationY>
         <assignmentItems>
             <assignToReference>changeItemFeeInputRepresentation.amount</assignToReference>
             <operator>Assign</operator>
@@ -293,7 +314,7 @@
         <name>Change_Item_Fee_Input_Representations_Assignment</name>
         <label>Change Item Fee Input Representations Assignment</label>
         <locationX>1414</locationX>
-        <locationY>4334</locationY>
+        <locationY>4586</locationY>
         <assignmentItems>
             <assignToReference>changeItemInputRepresentation.changeItemFees</assignToReference>
             <operator>Add</operator>
@@ -308,8 +329,8 @@
     <assignments>
         <name>Change_Item_Input_Representation_Assignment</name>
         <label>Change Item Input Representation Assignment</label>
-        <locationX>1347</locationX>
-        <locationY>3867</locationY>
+        <locationX>1326</locationX>
+        <locationY>4046</locationY>
         <assignmentItems>
             <assignToReference>changeItemInputRepresentation.orderItemSummaryId</assignToReference>
             <operator>Assign</operator>
@@ -353,7 +374,7 @@
         <name>Change_Item_List_Assignment</name>
         <label>Change Item List Assignment</label>
         <locationX>1238</locationX>
-        <locationY>1154</locationY>
+        <locationY>1514</locationY>
         <assignmentItems>
             <assignToReference>changeItems</assignToReference>
             <operator>Add</operator>
@@ -369,7 +390,7 @@
         <name>changeItemWithFees_Count</name>
         <label>changeItemWithFees Count</label>
         <locationX>908</locationX>
-        <locationY>3194</locationY>
+        <locationY>3338</locationY>
         <assignmentItems>
             <assignToReference>changeItemWithFeesCount</assignToReference>
             <operator>AssignCount</operator>
@@ -384,8 +405,8 @@
     <assignments>
         <name>Clean_ChangeItemFees_Input_Representation</name>
         <label>Clean ChangeItemFees Input Representation</label>
-        <locationX>1347</locationX>
-        <locationY>4011</locationY>
+        <locationX>1326</locationX>
+        <locationY>4154</locationY>
         <assignmentItems>
             <assignToReference>changeItemInputRepresentation.changeItemFees</assignToReference>
             <operator>RemoveAll</operator>
@@ -400,8 +421,8 @@
     <assignments>
         <name>Clean_ReturnOrderLineItemFees_Input_Representation</name>
         <label>Clean ReturnOrderLineItemFees Input Representation</label>
-        <locationX>1687</locationX>
-        <locationY>5151</locationY>
+        <locationX>1326</locationX>
+        <locationY>5510</locationY>
         <assignmentItems>
             <assignToReference>returnOrderLineItemInputRepresentation.returnOrderLineItemFees</assignToReference>
             <operator>RemoveAll</operator>
@@ -416,8 +437,8 @@
     <assignments>
         <name>Invocable_Action_Error_Message</name>
         <label>Invocable Action Error Message</label>
-        <locationX>1568</locationX>
-        <locationY>6074</locationY>
+        <locationX>1678</locationX>
+        <locationY>6434</locationY>
         <assignmentItems>
             <assignToReference>errorMessage</assignToReference>
             <operator>Assign</operator>
@@ -440,6 +461,7 @@
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Failure_Exit</targetReference>
         </connector>
     </assignments>
@@ -447,7 +469,7 @@
         <name>No_Items_Error_Message</name>
         <label>No Items Error Message</label>
         <locationX>314</locationX>
-        <locationY>614</locationY>
+        <locationY>566</locationY>
         <assignmentItems>
             <assignToReference>errorMessage</assignToReference>
             <operator>Assign</operator>
@@ -476,8 +498,8 @@
     <assignments>
         <name>Return_Order_Input</name>
         <label>Return Order Input</label>
-        <locationX>1239</locationX>
-        <locationY>5688</locationY>
+        <locationX>1326</locationX>
+        <locationY>6134</locationY>
         <assignmentItems>
             <assignToReference>returnOrderInputRepresentation.returnOrderLineItems</assignToReference>
             <operator>Add</operator>
@@ -514,7 +536,7 @@
         <name>Return_Order_Line_Item_Fee_Input</name>
         <label>Return Order Line Item Fee Input</label>
         <locationX>1414</locationX>
-        <locationY>5474</locationY>
+        <locationY>5834</locationY>
         <assignmentItems>
             <assignToReference>returnOrderLineItemFeeInputRepresentation.amount</assignToReference>
             <operator>Assign</operator>
@@ -558,7 +580,7 @@
         <name>Return_Order_Line_Item_Fees</name>
         <label>Return Order Line Item Fees</label>
         <locationX>1414</locationX>
-        <locationY>5582</locationY>
+        <locationY>5942</locationY>
         <assignmentItems>
             <assignToReference>returnOrderLineItemInputRepresentation.returnOrderLineItemFees</assignToReference>
             <operator>Add</operator>
@@ -574,7 +596,7 @@
         <name>Return_Order_Line_Item_Input</name>
         <label>Return Order Line Item Input</label>
         <locationX>1326</locationX>
-        <locationY>5150</locationY>
+        <locationY>5402</locationY>
         <assignmentItems>
             <assignToReference>returnOrderLineItemInputRepresentation.orderItemSummaryId</assignToReference>
             <operator>Assign</operator>
@@ -617,8 +639,8 @@
     <assignments>
         <name>Set_changeItemFees_List</name>
         <label>Set changeItemFees List</label>
-        <locationX>1557</locationX>
-        <locationY>4018</locationY>
+        <locationX>1326</locationX>
+        <locationY>4262</locationY>
         <assignmentItems>
             <assignToReference>changeItemFees</assignToReference>
             <operator>Assign</operator>
@@ -633,8 +655,8 @@
     <assignments>
         <name>Set_itemFeesToReturn_List</name>
         <label>Set itemFeesToReturn List</label>
-        <locationX>1816</locationX>
-        <locationY>5326</locationY>
+        <locationX>1326</locationX>
+        <locationY>5618</locationY>
         <assignmentItems>
             <assignToReference>itemFeesToReturn</assignToReference>
             <operator>Assign</operator>
@@ -650,7 +672,7 @@
         <name>Set_stage_to_part_1</name>
         <label>Set stage to part 1</label>
         <locationX>1150</locationX>
-        <locationY>614</locationY>
+        <locationY>974</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -666,7 +688,7 @@
         <name>Set_stage_to_part_2</name>
         <label>Set stage to part 2</label>
         <locationX>1150</locationX>
-        <locationY>830</locationY>
+        <locationY>1190</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -682,7 +704,7 @@
         <name>Set_Stage_To_Stage_3</name>
         <label>Set Stage To Stage 3</label>
         <locationX>908</locationX>
-        <locationY>1562</locationY>
+        <locationY>1922</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -698,7 +720,7 @@
         <name>Set_Stage_To_Stage_4</name>
         <label>Set Stage To Stage 4</label>
         <locationX>864</locationX>
-        <locationY>3410</locationY>
+        <locationY>3554</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -714,7 +736,7 @@
         <name>Set_Stage_To_Stage_5</name>
         <label>Set Stage To Stage 5</label>
         <locationX>1150</locationX>
-        <locationY>4826</locationY>
+        <locationY>5078</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -730,7 +752,7 @@
         <name>Set_Stage_To_Stage_6</name>
         <label>Set Stage To Stage 6</label>
         <locationX>1150</locationX>
-        <locationY>6074</locationY>
+        <locationY>6434</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -753,7 +775,7 @@
         <name>Set_Unmanaged_Order_Error_Message</name>
         <label>Set Unmanaged Order Error Message</label>
         <locationX>50</locationX>
-        <locationY>398</locationY>
+        <locationY>350</locationY>
         <assignmentItems>
             <assignToReference>errorMessage</assignToReference>
             <operator>Assign</operator>
@@ -782,8 +804,8 @@
     <assignments>
         <name>Set_Wrong_Entity_Error_Message</name>
         <label>Set Wrong Entity Error Message</label>
-        <locationX>2360</locationX>
-        <locationY>506</locationY>
+        <locationX>2734</locationX>
+        <locationY>350</locationY>
         <assignmentItems>
             <assignToReference>errorMessage</assignToReference>
             <operator>Assign</operator>
@@ -868,8 +890,8 @@
     <decisions>
         <name>Are_Any_Items_To_Return</name>
         <label>Are Any Items To Return</label>
-        <locationX>824</locationX>
-        <locationY>437</locationY>
+        <locationX>1260</locationX>
+        <locationY>458</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>NoItems</name>
@@ -906,7 +928,7 @@
         <name>Created_Product2_Exists</name>
         <label>Created Product2 Exists?</label>
         <locationX>710</locationX>
-        <locationY>1886</locationY>
+        <locationY>2246</locationY>
         <defaultConnector>
             <targetReference>Create_Product2</targetReference>
         </defaultConnector>
@@ -930,8 +952,8 @@
     <decisions>
         <name>Does_PricebookEntry_Exist</name>
         <label>Does PricebookEntry Exist?</label>
-        <locationX>704</locationX>
-        <locationY>2737</locationY>
+        <locationX>710</locationX>
+        <locationY>2846</locationY>
         <defaultConnector>
             <targetReference>Create_PricebookEntry</targetReference>
         </defaultConnector>
@@ -955,8 +977,8 @@
     <decisions>
         <name>isValid</name>
         <label>isValid</label>
-        <locationX>1469</locationX>
-        <locationY>290</locationY>
+        <locationX>1524</locationX>
+        <locationY>242</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Unmanaged_Order</name>
@@ -1014,8 +1036,8 @@
     <decisions>
         <name>No_Return_Fees_Allowed</name>
         <label>No Return Fees Allowed</label>
-        <locationX>1138</locationX>
-        <locationY>449</locationY>
+        <locationX>1150</locationX>
+        <locationY>566</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>Not_Allowed</name>
@@ -1051,8 +1073,8 @@
     <decisions>
         <name>OrderSummary_Has_PriceBook</name>
         <label>OrderSummary Has PriceBook?</label>
-        <locationX>874</locationX>
-        <locationY>2311</locationY>
+        <locationX>908</locationX>
+        <locationY>2630</locationY>
         <defaultConnector>
             <targetReference>Fees_Prompt</targetReference>
         </defaultConnector>
@@ -1076,8 +1098,8 @@
     <decisions>
         <name>Product2_Provided</name>
         <label>Product2 Provided?</label>
-        <locationX>900</locationX>
-        <locationY>1708</locationY>
+        <locationX>908</locationX>
+        <locationY>2030</locationY>
         <defaultConnector>
             <targetReference>OrderSummary_Has_PriceBook</targetReference>
         </defaultConnector>
@@ -1101,8 +1123,8 @@
     <decisions>
         <name>Show_the_fee_screen</name>
         <label>Show the fee screen</label>
-        <locationX>1142</locationX>
-        <locationY>1530</locationY>
+        <locationX>1150</locationX>
+        <locationY>1814</locationY>
         <defaultConnector>
             <targetReference>Change_Item_Representation_Loop</targetReference>
         </defaultConnector>
@@ -1127,7 +1149,7 @@
         <name>With_Return_Fee</name>
         <label>With Return Fee?</label>
         <locationX>908</locationX>
-        <locationY>3302</locationY>
+        <locationY>3446</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>No</name>
@@ -1167,7 +1189,7 @@
         <name>Change_Item_Assignment_Loop</name>
         <label>Change Item Assignment Loop</label>
         <locationX>1150</locationX>
-        <locationY>938</locationY>
+        <locationY>1298</locationY>
         <assignNextValueToReference>selectedOrderItem</assignNextValueToReference>
         <collectionReference>selectedOrderItemSummaries</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -1182,7 +1204,7 @@
         <name>Change_Item_Fees_Loop</name>
         <label>Change Item Fees Loop</label>
         <locationX>1326</locationX>
-        <locationY>4161</locationY>
+        <locationY>4370</locationY>
         <collectionReference>changeItemFees</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -1195,8 +1217,8 @@
     <loops>
         <name>Change_Item_Representation_Loop</name>
         <label>Change Item Representation Loop</label>
-        <locationX>1178</locationX>
-        <locationY>3983</locationY>
+        <locationX>1150</locationX>
+        <locationY>3938</locationY>
         <assignNextValueToReference>changeItem</assignNextValueToReference>
         <collectionReference>changeItems</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -1210,8 +1232,8 @@
     <loops>
         <name>ItemFees_To_Return</name>
         <label>ItemFees To Return</label>
-        <locationX>1598</locationX>
-        <locationY>5326</locationY>
+        <locationX>1326</locationX>
+        <locationY>5726</locationY>
         <collectionReference>itemFeesToReturn</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -1225,7 +1247,7 @@
         <name>Items_to_Return</name>
         <label>Items to Return</label>
         <locationX>1150</locationX>
-        <locationY>5042</locationY>
+        <locationY>5294</locationY>
         <collectionReference>changeItems</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -1244,7 +1266,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -1258,7 +1280,7 @@
         <name>Create_PricebookEntry</name>
         <label>Create PricebookEntry</label>
         <locationX>842</locationX>
-        <locationY>2810</locationY>
+        <locationY>2954</locationY>
         <assignRecordIdToReference>selectedPricebookEntryId</assignRecordIdToReference>
         <connector>
             <targetReference>Fees_Prompt</targetReference>
@@ -1286,8 +1308,8 @@
     <recordCreates>
         <name>Create_Product2</name>
         <label>Create Product2</label>
-        <locationX>872</locationX>
-        <locationY>1897</locationY>
+        <locationX>842</locationX>
+        <locationY>2354</locationY>
         <assignRecordIdToReference>selectedProduct2Id</assignRecordIdToReference>
         <connector>
             <targetReference>OrderSummary_Has_PriceBook</targetReference>
@@ -1321,8 +1343,8 @@
     <recordLookups>
         <name>Get_Created_Product2</name>
         <label>Get Created Product2</label>
-        <locationX>716</locationX>
-        <locationY>1700</locationY>
+        <locationX>710</locationX>
+        <locationY>2138</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Created_Product2_Exists</targetReference>
@@ -1342,13 +1364,14 @@
     <recordLookups>
         <name>Get_Order_Item_Summary</name>
         <label>Get Order Item Summary</label>
-        <locationX>1078</locationX>
-        <locationY>321</locationY>
+        <locationX>1260</locationX>
+        <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Are_Any_Items_To_Return</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Set_Wrong_Entity_Error_Message</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -1381,13 +1404,14 @@
         <description>Get OrderSummary for the record Id passed</description>
         <name>Get_Order_Summary</name>
         <label>Get Order Summary</label>
-        <locationX>1469</locationX>
-        <locationY>182</locationY>
+        <locationX>1524</locationX>
+        <locationY>134</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>isValid</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Set_Wrong_Entity_Error_Message</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -1405,8 +1429,8 @@
     <recordLookups>
         <name>Get_PricebookEntry</name>
         <label>Get PricebookEntry</label>
-        <locationX>603</locationX>
-        <locationY>2481</locationY>
+        <locationX>710</locationX>
+        <locationY>2738</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Does_PricebookEntry_Exist</targetReference>
@@ -1433,8 +1457,8 @@
     <recordRollbacks>
         <name>Failure_Exit</name>
         <label>Failure Exit</label>
-        <locationX>1469</locationX>
-        <locationY>6566</locationY>
+        <locationX>1524</locationX>
+        <locationY>6926</locationY>
         <connector>
             <targetReference>Error_Message</targetReference>
         </connector>
@@ -1443,7 +1467,7 @@
         <name>Confirmation</name>
         <label>Confirmation</label>
         <locationX>1150</locationX>
-        <locationY>6182</locationY>
+        <locationY>6542</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1482,8 +1506,8 @@
     <screens>
         <name>Error_Message</name>
         <label>Error Message</label>
-        <locationX>1469</locationX>
-        <locationY>6674</locationY>
+        <locationX>1524</locationX>
+        <locationY>7034</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1504,7 +1528,7 @@
         <name>Fee_Changes_Selection</name>
         <label>Fee Changes Selection</label>
         <locationX>864</locationX>
-        <locationY>3518</locationY>
+        <locationY>3662</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1592,7 +1616,7 @@
         <name>Fees_Prompt</name>
         <label>Fees Prompt</label>
         <locationX>908</locationX>
-        <locationY>3086</locationY>
+        <locationY>3230</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1703,7 +1727,7 @@
         <name>PreviewChanges</name>
         <label>PreviewChanges</label>
         <locationX>1150</locationX>
-        <locationY>4934</locationY>
+        <locationY>5186</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1790,7 +1814,7 @@
         <name>Product_Selection</name>
         <label>Product Selection</label>
         <locationX>1150</locationX>
-        <locationY>722</locationY>
+        <locationY>1082</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -1873,7 +1897,7 @@
         <name>Reasons_Selection</name>
         <label>Reasons Selection</label>
         <locationX>1150</locationX>
-        <locationY>1346</locationY>
+        <locationY>1706</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -2000,8 +2024,8 @@
         <stageOrder>6</stageOrder>
     </stages>
     <start>
-        <locationX>1343</locationX>
-        <locationY>48</locationY>
+        <locationX>1398</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Order_Summary</targetReference>
         </connector>
